@@ -13,6 +13,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.bson.Document;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +39,8 @@ public class DropwizardMongoDBApplication extends Application<DropwizardMongoDBC
         MongoDatabase db = mongoClient.getDatabase(config.getMongoDB());
         MongoCollection<Document> collection = db.getCollection(config.getCollectionName());
         logger.info("Registering RESTful API resources");
+        final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(LoggingFilter.class.getName());
+        env.jersey().register(new LoggingFilter(LOGGER, true));
         //env.jersey().register(new PingResource());
         env.jersey().register(new EmployeeResource(collection, new MongoService()));
         env.healthChecks().register("DropwizardMongoDBHealthCheck",

@@ -1,9 +1,0 @@
-application/resource/PingResource.class
-application/domain/Employee.class
-application/DropwizardMongoDBConfiguration.class
-application/resource/DropwizardMongoDBHealthCheckResource.class
-application/resource/EmployeeResource.class
-application/MongoManaged.class
-application/DropwizardMongoDBApplication.class
-application/domain/PingRequest.class
-application/service/MongoService.class
